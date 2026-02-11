@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { QrCode, Download, Copy, Check } from "lucide-react"
 import { QRCodeSVG } from "qrcode.react"
+import Script from "next/script"
 
 type ErrorCorrectionLevel = "L" | "M" | "Q" | "H"
 
@@ -19,6 +20,30 @@ export default function QRCodeGenerator() {
   const [copied, setCopied] = useState(false)
   const [complexity, setComplexity] = useState<ErrorCorrectionLevel>("M")
   const qrRef = useRef<SVGSVGElement>(null)
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "QR Code Generator",
+    "description": "Free QR code generator without watermarks. Create custom QR codes with adjustable colors, size, and error correction.",
+    "url": "https://qr-code-generator.vercel.app",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "No watermarks",
+      "Custom colors",
+      "Adjustable size (128-512px)",
+      "Error correction levels",
+      "PNG download",
+      "Copy to clipboard",
+      "Real-time preview"
+    ]
+  }
 
   const handleGenerate = () => {
     if (url.trim()) {
@@ -86,7 +111,13 @@ export default function QRCodeGenerator() {
   }
 
   return (
-    <main className="min-h-screen bg-background p-4 md:p-8">
+    <>
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <main className="min-h-screen bg-background p-4 md:p-8">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -280,5 +311,6 @@ export default function QRCodeGenerator() {
         </div>
       </div>
     </main>
+    </>
   )
 }
