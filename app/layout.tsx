@@ -51,18 +51,18 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/icon.svg',
-        width: 1200,
-        height: 630,
+        url: '/apple-icon.png',
+        width: 180,
+        height: 180,
         alt: 'QR Code Generator - Free and No Watermark',
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Free QR Code Generator - No Watermark',
     description: 'Generate free QR codes without watermarks. Customize colors, size, and error correction.',
-    images: ['/icon.svg'],
+    images: ['/apple-icon.png'],
   },
   robots: {
     index: true,
